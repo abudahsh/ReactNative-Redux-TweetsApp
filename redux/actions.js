@@ -1,18 +1,36 @@
-import { login } from "./../components/api";
-
-const loginUser = (username, password) => dispatch => {
+import { login, getTweets } from "./../components/api";
+import store from "./store";
+export const loginUser = (username, password) => dispatch => {
   dispatch({ type: "LOGIN_SENT" });
   login(username, password)
     .then(results => {
       const { user, token } = results;
       dispatch({
         type: "LOG_IN_SUCCESS",
-        payload: { token, username: user.username, id: user.id }
+        payload: {
+          token,
+          username: user.username,
+          id: user.id,
+          isAuthenticated: true
+        }
       });
     })
     .catch(err => {
-      dispatch({ type: "LOG_IN_FAILD", payload: err });
+      dispatch({ type: "LOGIN_FAILED", payload: { message: err } });
     });
 };
 
-export default loginUser;
+export const fetchTweets = () => (dispatch, getState) => {
+  dispatch({ type: "FETCH_SENT" });
+  const token = getState().userLogin.token;
+  getTweets(token)
+    .then(results => {
+      dispatch({
+        type: "TWEET_FETCH_SUCESS",
+        payload: { tweets: results }
+      });
+    })
+    .catch(err => {
+      dispatch({ type: "FETCH_FAILD", payload: { message: err } });
+    });
+};

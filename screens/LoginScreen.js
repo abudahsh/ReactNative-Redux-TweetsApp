@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import loginUser from "./../redux/actions";
+import { loginUser } from "./../redux/actions";
 import { PropTypes } from "prop-types";
 import {
   View,
   Button,
+  Text,
   AsyncStorage,
   TextInput,
   StyleSheet
@@ -13,18 +14,20 @@ class LoginScreen extends Component {
   state = {
     username: "",
     password: "",
-    token: AsyncStorage.getItem("token"),
+    token: "",
     message: ""
   };
 
   handleSubmit = () => {
     this.props.login(this.state.username, this.state.password);
-    this.props.navigation.navigate("TweetFeed");
-    console.log(this.state);
+    if (this.props.isAuthenticated) {
+      this.props.navigation.navigate("TweetFeed");
+    }
   };
   render() {
     return (
       <View style={styles.loginStyle}>
+        <Text>{this.props.message}</Text>
         <TextInput
           value={this.state.username}
           onChangeText={username => this.setState({ username })}
@@ -41,9 +44,10 @@ class LoginScreen extends Component {
 }
 
 const mapStateToProps = state => ({
-  username: state.userReducer.username,
-  // token: state.userReducer.token,
-  message: state.userReducer.message
+  username: state.userLogin.username,
+  // token: state.userLogin.token,
+  message: state.userLogin.message,
+  isAuthenticated: state.userLogin.isAuthenticated
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -2,39 +2,19 @@ import React from "react";
 import { connect } from "react-redux";
 import { Text, FlatList, View, Button } from "react-native";
 import Row from "./../components/Row";
-
+import { fetchTweets } from "./../redux/actions";
 const renderItem = ({ item }) => <Row {...item} />;
 
 class TweetFeedScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tweets: []
-    };
-    this.getTweets = this.getTweets.bind(this);
-  }
-  _keyExtractor = (item, index) => item.id;
-
-  getTweets = async () => {
-    const token = await this.props.token;
-    console.log("started...");
-    const headers = {
-      "Content-Type": "application/json"
-    };
-
-    if (token) {
-      headers.Authorization = `Token ${token}`;
-      console.log(token);
-    }
-    const response = await fetch("http://10.0.3.2:8000/test/tweets/", {
-      headers
-    });
-    console.log("sent reuqest");
-    const results = await response.json();
-    console.log(results);
-    this.setState({ tweets: results });
+  state = {
+    tweets: []
   };
 
+  _keyExtractor = (item, index) => item.id;
+  handlePress = () => {
+    this.props.getTweets(this.props.token);
+    console.log(this.props);
+  };
   render() {
     return (
       <View>
@@ -42,17 +22,26 @@ class TweetFeedScreen extends React.Component {
         <Text style={{ color: "red" }}>username : {this.props.username}</Text>
         <FlatList
           renderItem={renderItem}
-          data={this.state.tweets}
+          data={this.props.tweets}
           keyExtractor={this._keyExtractor}
         />
-        <Button title="Load" onPress={this.getTweets} />
+        <Button title="Load" onPress={this.handlePress} />
       </View>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  token: state.userReducer.token
+  username: state.userLogin.username,
+  token: state.userLogin.token,
+  tweets: state.tweetFetch.tweets
 });
 
-export default connect(mapStateToProps)(TweetFeedScreen);
+const mapDispatchToProps = dispatch => ({
+  getTweets: token => dispatch(fetchTweets())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TweetFeedScreen);
