@@ -10,10 +10,9 @@ class TweetFeedScreen extends React.Component {
     tweets: []
   };
 
-  _keyExtractor = (item, index) => item.id;
+  _keyExtractor = (item, index) => item.id.toString();
   handlePress = () => {
     this.props.getTweets(this.props.token);
-    console.log(this.props);
   };
   render() {
     return (

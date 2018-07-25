@@ -28,12 +28,32 @@ const userLogin = (state = initialState.userState, action) => {
         isAuthenticated: action.payload.isAuthenticated
       };
 
+    case "REGISTER_SUCCESS":
+      // try {
+      //   async () => {
+      //     await AsyncStorage.setItem("token", action.payload.token);
+      //   };
+      // } catch (error) {
+      //   console.error(error);
+      // }
+
+      return {
+        ...state,
+        message: "Register Success",
+        username: action.payload.username,
+        token: action.payload.token,
+        isAuthenticated: action.payload.isAuthenticated
+      };
     case "AUTHENTICATION_ERROR":
     case "LOGIN_FAILED":
     case "REGISTRATION_FAILED":
     case "LOGOUT_SUCCESSFUL":
       //await AsyncStorage.removeItem("token");
-      return { ...state, message: action.payload.message };
+      return {
+        ...state,
+        message: action.payload.message,
+        isAuthenticated: false
+      };
     default:
       return state;
   }
