@@ -17,8 +17,8 @@ import store from "./../redux/store";
 import TwitterIcon from "./../components/TwitterIcon";
 class LoginScreen extends Component {
   state = {
-    username: "",
-    password: "",
+    username: "dahsh",
+    password: "killmemore",
     token: "",
     message: "",
     isAuthenticated: false
@@ -29,7 +29,9 @@ class LoginScreen extends Component {
   };
   componentWillUpdate() {
     if (store.getState().userLogin.isAuthenticated) {
-      this.props.navigation.navigate("TweetFeed");
+      this.props.navigation.navigate("TweetFeed", {
+        creator: this.state.username
+      });
     }
   }
   render() {

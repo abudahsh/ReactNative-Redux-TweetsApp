@@ -9,7 +9,11 @@ const initialState = {
 const userLogin = (state = initialState.userState, action) => {
   switch (action.type) {
     case "LOGIN_SENT":
-      return { ...state, message: "Login Sent" };
+      return {
+        ...state,
+        message: "Login Sent",
+        isLoading: action.payload.isLoading
+      };
 
     case "LOG_IN_SUCCESS":
       // try {
@@ -25,7 +29,8 @@ const userLogin = (state = initialState.userState, action) => {
         message: "Login Success",
         username: action.payload.username,
         token: action.payload.token,
-        isAuthenticated: action.payload.isAuthenticated
+        isAuthenticated: action.payload.isAuthenticated,
+        isLoading: action.payload.isLoading
       };
 
     case "REGISTER_SUCCESS":
@@ -42,7 +47,8 @@ const userLogin = (state = initialState.userState, action) => {
         message: "Register Success",
         username: action.payload.username,
         token: action.payload.token,
-        isAuthenticated: action.payload.isAuthenticated
+        isAuthenticated: action.payload.isAuthenticated,
+        isLoading: action.payload.isLoading
       };
     case "AUTHENTICATION_ERROR":
     case "LOGIN_FAILED":
@@ -62,9 +68,17 @@ const userLogin = (state = initialState.userState, action) => {
 const tweetFetch = (state = initialState.TweetState, action) => {
   switch (action.type) {
     case "FETCH_SENT":
-      return { ...state, message: "Fetching Tweets Started ...." };
+      return {
+        ...state,
+        message: "Fetching Tweets Started ....",
+        isLoading: action.payload.isLoading
+      };
     case "TWEET_FETCH_SUCESS":
-      return { ...state, tweets: action.payload.tweets };
+      return {
+        ...state,
+        tweets: action.payload.tweets,
+        isLoading: action.payload.isLoading
+      };
 
     case "FETCH_FAILD":
       return {

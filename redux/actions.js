@@ -1,7 +1,7 @@
 import { login, getTweets, register } from "./../components/api";
 import store from "./store";
 export const loginUser = (username, password) => dispatch => {
-  dispatch({ type: "LOGIN_SENT" });
+  dispatch({ type: "LOGIN_SENT", payload:{isLoading:true} });
   login(username, password)
     .then(results => {
       const { user, token } = results;
@@ -11,7 +11,8 @@ export const loginUser = (username, password) => dispatch => {
           token,
           username: user.username,
           id: user.id,
-          isAuthenticated: true
+          isAuthenticated: true,
+          isLoading:false
         }
       });
     })
@@ -20,7 +21,7 @@ export const loginUser = (username, password) => dispatch => {
     });
 };
 export const registerUser = (username, password) => dispatch => {
-  dispatch({ type: "REGISTER_SENT" });
+  dispatch({ type: "REGISTER_SENT" , payload:{isLoading:true} });
   register(username, password)
     .then(results => {
       const { user, token } = results;
@@ -30,7 +31,8 @@ export const registerUser = (username, password) => dispatch => {
           token,
           username: user.username,
           id: user.id,
-          isAuthenticated: true
+          isAuthenticated: true,
+          isLoading:false
         }
       });
     })
@@ -40,13 +42,13 @@ export const registerUser = (username, password) => dispatch => {
 };
 
 export const fetchTweets = () => (dispatch, getState) => {
-  dispatch({ type: "FETCH_SENT" });
+  dispatch({ type: "FETCH_SENT" , payload:{isLoading:true}});
   const token = getState().userLogin.token;
   getTweets(token)
     .then(results => {
       dispatch({
         type: "TWEET_FETCH_SUCESS",
-        payload: { tweets: results }
+        payload: { tweets: results ,isLoading:false}
       });
     })
     .catch(err => {

@@ -1,8 +1,9 @@
 import { AsyncStorage } from "react-native";
+const localIp = "192.168.1.2";
 export const login = async (username, password) => {
   console.log("fired");
   const response = await fetch(
-    "http://192.168.1.5:8000/account/api-auth/login/",
+    `http://${localIp}:8000/account/api-auth/login/`,
     {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -24,7 +25,7 @@ export const login = async (username, password) => {
 export const register = async (username, password) => {
   console.log("fired");
   const response = await fetch(
-    "http://192.168.1.5:8000/account/api-auth/register/",
+    `http://${localIp}:8000/account/api-auth/register/`,
     {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -53,7 +54,7 @@ export const getTweets = async token => {
   if (token) {
     headers.Authorization = `Token ${token}`;
   }
-  const response = await fetch("http://192.168.1.5:8000/test/tweets/", {
+  const response = await fetch(`http:/${localIp}:8000/test/tweets/`, {
     headers
   });
   console.log("sent reuqest");
