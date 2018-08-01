@@ -71,12 +71,21 @@ class RegisterScreen extends Component {
           value={this.state.password}
           onChangeText={password2 => this.setState({ password2 })}
         />
-        <TouchableOpacity
-          style={styles.buttonStyle}
-          onPress={this.handleSubmit}
+        <View
+          style={{
+            backgroundColor: "white",
+            borderRadius: 20,
+            marginBottom: 16,
+            marginTop: 40
+          }}
         >
-          <Text style={styles.loginText}>Sign Up</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.buttonStyle}
+            onPress={this.handleSubmit}
+          >
+            <Text style={styles.loginText}>Sign Up</Text>
+          </TouchableOpacity>
+        </View>
         <Text>I Have account I wanna</Text>
         <TouchableOpacity
           onPress={() => this.props.navigation.navigate("Login")}
@@ -120,27 +129,19 @@ const styles = StyleSheet.create({
   inputStyle: {
     backgroundColor: "white",
     justifyContent: "center",
-    alignItems: "center",
-    color: "orange",
-    fontSize: 14,
-    width: 200,
+    color: "#1da1f3",
+    fontSize: 16,
+    width: 300,
+    height: 40,
     marginBottom: 9,
-    borderColor: "red",
-    borderWidth: 2,
-    borderRadius: 6
-  },
-
-  hintStyle: {
-    color: "orange"
+    borderRadius: 9
   },
   loginText: {
-    backgroundColor: "white",
     color: "#1da1f3",
     fontSize: 24,
     textAlign: "center"
   },
   buttonStyle: {
-    borderRadius: 9,
     padding: 8,
     width: 240
   }

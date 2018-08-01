@@ -51,11 +51,21 @@ class LoginScreen extends Component {
           value={this.state.password}
           onChangeText={password => this.setState({ password })}
         />
-        <Button
-          style={styles.buttonStyle}
-          title="Login"
-          onPress={this.handleSubmit}
-        />
+        <View
+          style={{
+            backgroundColor: "white",
+            borderRadius: 20,
+            marginBottom: 16,
+            marginTop: 40
+          }}
+        >
+          <TouchableOpacity
+            style={styles.buttonStyle}
+            onPress={this.handleSubmit}
+          >
+            <Text style={styles.loginText}>Sign In</Text>
+          </TouchableOpacity>
+        </View>
         <Text>I Don't Have an account I wanna</Text>
         <TouchableOpacity
           onPress={() => this.props.navigation.navigate("Register")}
@@ -100,15 +110,20 @@ const styles = StyleSheet.create({
   inputStyle: {
     backgroundColor: "white",
     justifyContent: "center",
-    color: "orange",
-    fontSize: 14,
-    width: 200,
+    color: "#1da1f3",
+    fontSize: 16,
+    width: 300,
+    height: 40,
     marginBottom: 9,
-    borderColor: "red",
-    borderWidth: 2,
-    borderRadius: 6
+    borderRadius: 9
+  },
+  loginText: {
+    color: "#1da1f3",
+    fontSize: 24,
+    textAlign: "center"
   },
   buttonStyle: {
-    color: "red"
+    padding: 8,
+    width: 240
   }
 });

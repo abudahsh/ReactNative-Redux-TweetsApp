@@ -29,6 +29,8 @@ const userLogin = (state = initialState.userState, action) => {
         message: "Login Success",
         username: action.payload.username,
         token: action.payload.token,
+        profilePic: action.payload.profilePic,
+        nickName: action.payload.nickName,
         isAuthenticated: action.payload.isAuthenticated,
         isLoading: action.payload.isLoading
       };

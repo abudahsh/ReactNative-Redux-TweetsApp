@@ -44,8 +44,7 @@ const styles = StyleSheet.create({
   content: {
     flex: 4,
     paddingTop: 2,
-    paddingBottom: 8,
-    paddingRight: 16
+    paddingBottom: 8
   },
   mediaStyle: {
     flex: 1,

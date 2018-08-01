@@ -17,7 +17,6 @@ class WelcomeScreen extends React.Component {
           style={styles.iconStyle}
           source={require("./../assets/twitter-white.jpg")}
         />
-        <Text style={{ paddingBottom: 9 }}>Welcome Gawaan</Text>
         <View
           style={{
             backgroundColor: "white",

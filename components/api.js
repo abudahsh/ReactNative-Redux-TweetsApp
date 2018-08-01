@@ -16,6 +16,7 @@ export const login = async (username, password) => {
   if (response.ok) {
     const results = await response.json();
     console.log("logged");
+    console.log(results);
     return results;
   }
   const err = await response.text();

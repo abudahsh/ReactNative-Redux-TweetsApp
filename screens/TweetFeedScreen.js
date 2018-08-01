@@ -1,8 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Text, FlatList, View, Button, TouchableOpacity } from "react-native";
+import {
+  Text,
+  FlatList,
+  View,
+  Button,
+  TouchableOpacity,
+  Image
+} from "react-native";
 import Row from "./../components/Row";
 import { fetchTweets } from "./../redux/actions";
+import store from "./../redux/store";
 
 class TweetFeedScreen extends React.Component {
   renderItem = ({ item }) => <Row {...item} />;
@@ -10,7 +18,14 @@ class TweetFeedScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: "Tweet Feed",
-      headerLeft: <Text>{navigation.getParam("creator", "username")}</Text>,
+      headerLeft: (
+        <TouchableOpacity style={{ marginLeft: 15 }}>
+          <Image
+            style={{ height: 40, width: 40, borderRadius: 8 }}
+            source={{ uri: store.getState().userLogin.profilePic }}
+          />
+        </TouchableOpacity>
+      ),
       headerStyle: {
         backgroundColor: "white"
       },
@@ -29,9 +44,7 @@ class TweetFeedScreen extends React.Component {
   componentDidMount() {
     this.props.getTweets(this.props.token);
   }
-  handlePress = () => {
-    this.props.getTweets(this.props.token);
-  };
+
   render() {
     if (this.props.isLoading) {
       return (
@@ -51,7 +64,6 @@ class TweetFeedScreen extends React.Component {
             data={this.props.tweets}
             keyExtractor={this._keyExtractor}
           />
-          <Button title="Load" onPress={this.handlePress} />
         </View>
       );
     }
@@ -61,6 +73,8 @@ class TweetFeedScreen extends React.Component {
 const mapStateToProps = state => ({
   username: state.userLogin.username,
   token: state.userLogin.token,
+  nickName: state.userLogin.nickName,
+  profilePic: state.userLogin.profilePic,
   tweets: state.tweetFetch.tweets,
   isLoading: state.tweetFetch.isLoading
 });
