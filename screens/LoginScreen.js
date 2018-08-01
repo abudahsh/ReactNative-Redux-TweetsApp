@@ -17,8 +17,8 @@ import store from "./../redux/store";
 import TwitterIcon from "./../components/TwitterIcon";
 class LoginScreen extends Component {
   state = {
-    username: "dahsh",
-    password: "killmemore",
+    username: "",
+    password: "",
     token: "",
     message: "",
     isAuthenticated: false
@@ -45,7 +45,7 @@ class LoginScreen extends Component {
           value={this.state.username}
           onChangeText={username => this.setState({ username })}
         />
-        <TextInput
+        <TextInput secureTextEntry={true}
           placeholder="Password"
           style={styles.inputStyle}
           value={this.state.password}
