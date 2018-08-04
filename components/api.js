@@ -1,22 +1,18 @@
 import { AsyncStorage } from "react-native";
-const localIp = "192.168.1.2";
+const localIp = "https://tweeternative.herokuapp.com";
 export const login = async (username, password) => {
   console.log("fired");
-  const response = await fetch(
-    `http://${localIp}:8000/account/api-auth/login/`,
-    {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        username,
-        password
-      })
-    }
-  );
+  const response = await fetch(`${localIp}/account/auth/login/`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({
+      username,
+      password
+    })
+  });
   if (response.ok) {
     const results = await response.json();
     console.log("logged");
-    console.log(results);
     return results;
   }
   const err = await response.text();
@@ -25,17 +21,14 @@ export const login = async (username, password) => {
 };
 export const register = async (username, password) => {
   console.log("fired");
-  const response = await fetch(
-    `http://${localIp}:8000/account/api-auth/register/`,
-    {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        username,
-        password
-      })
-    }
-  );
+  const response = await fetch(`${localIp}/account/auth/register/`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({
+      username,
+      password
+    })
+  });
   if (response.ok) {
     const results = await response.json();
     console.log("logged");
@@ -55,7 +48,7 @@ export const getTweets = async token => {
   if (token) {
     headers.Authorization = `Token ${token}`;
   }
-  const response = await fetch(`http:/${localIp}:8000/test/tweets/`, {
+  const response = await fetch(`${localIp}/test/tweets/`, {
     headers
   });
   console.log("sent reuqest");

@@ -1,4 +1,5 @@
 # ReactNative-Redux-TweetsApp
+<<<<<<< HEAD
 
 ## 1.Welcome Screen
 
@@ -14,4 +15,13 @@
 
 ## 4.Tweets Feed
 
+=======
+Welcome Screen
+![](welcome.gif)
+Login Functionaly
+![](login.gif)
+Authentication Functionaly
+![](login-func.gif)
+Tweets Feed
+>>>>>>> bf7998f78691419b1c95b668b9218dbd72614cd5
 ![](feed.gif)

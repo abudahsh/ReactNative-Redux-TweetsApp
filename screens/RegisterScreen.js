@@ -60,12 +60,14 @@ class RegisterScreen extends Component {
           onChangeText={email => this.setState({ email })}
         />
         <TextInput
+          secureTextEntry={true}
           placeholder="Password"
           style={styles.inputStyle}
           value={this.state.password}
           onChangeText={password1 => this.setState({ password1 })}
         />
         <TextInput
+          secureTextEntry={true}
           placeholder="Password"
           style={styles.inputStyle}
           value={this.state.password}

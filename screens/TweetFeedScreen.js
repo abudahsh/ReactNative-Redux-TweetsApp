@@ -19,9 +19,12 @@ class TweetFeedScreen extends React.Component {
     return {
       title: "Tweet Feed",
       headerLeft: (
-        <TouchableOpacity style={{ marginLeft: 15 }}>
+        <TouchableOpacity
+          style={{ marginLeft: 15 }}
+          onPress={() => navigation.openDrawer()}
+        >
           <Image
-            style={{ height: 40, width: 40, borderRadius: 8 }}
+            style={{ height: 45, width: 45, borderRadius: 8 }}
             source={{ uri: store.getState().userLogin.profilePic }}
           />
         </TouchableOpacity>
@@ -46,7 +49,7 @@ class TweetFeedScreen extends React.Component {
   }
 
   render() {
-    if (this.props.isLoading) {
+    if (store.getState().userLogin.isLoading) {
       return (
         <View>
           <Text
@@ -57,6 +60,7 @@ class TweetFeedScreen extends React.Component {
         </View>
       );
     } else {
+      const { navigation } = this.props;
       return (
         <View>
           <FlatList
