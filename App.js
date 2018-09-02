@@ -19,6 +19,7 @@ import LogoutScreen from "./screens/LogoutScreen";
 import NotificationsScreen from "./screens/NotificationsScreen";
 import SearchScreen from "./screens/Searchscreen";
 import MessagesScreen from "./screens/MessagesScreen";
+
 const CustomDrawerComp = props => (
   <View style={{ flex: 1, paddingLeft: 20 }}>
     <View

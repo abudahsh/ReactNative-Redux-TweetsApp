@@ -60,3 +60,24 @@ export const getTweets = async token => {
   console.log(err);
   throw err;
 };
+
+export const logout = async token => {
+  console.log("loging out..");
+  const headers = {
+    "Content-Type": "application/json"
+  };
+
+  if (token) {
+    headers.Authorization = `Token ${token}`;
+  }
+  const response = await fetch(`${localIp}/account/api-auth/logout/`, {
+    method: "POST",
+    headers: headers,
+    body: ""
+  });
+  if (response.ok) {
+    const results = await response.json();
+    console.log("logged");
+    return results;
+  }
+};

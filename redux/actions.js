@@ -1,4 +1,4 @@
-import { login, getTweets, register } from "./../components/api";
+import { login, getTweets, register, logout } from "./../components/api";
 import store from "./store";
 export const loginUser = (username, password) => dispatch => {
   dispatch({ type: "LOGIN_SENT", payload: { isLoading: true } });
@@ -55,5 +55,27 @@ export const fetchTweets = () => (dispatch, getState) => {
     })
     .catch(err => {
       dispatch({ type: "FETCH_FAILD", payload: { message: err } });
+    });
+};
+
+export const logoutUser = () => (dispatch, getState) => {
+  dispatch({ type: "LOGOUT_SENT", payload: { isLoading: true } });
+  logout(getState().userLogin.token)
+    .then(results => {
+      dispatch({
+        type: "LOGOUT_SUCCESSFUL",
+        payload: {
+          nickName: "",
+          profilePic: "",
+          token: "",
+          username: "",
+          id: "",
+          isAuthenticated: false,
+          isLoading: false
+        }
+      });
+    })
+    .catch(err => {
+      dispatch({ type: "LOGOUT_FAILD", payload: { message: err } });
     });
 };

@@ -59,8 +59,13 @@ const userLogin = (state = initialState.userState, action) => {
       //await AsyncStorage.removeItem("token");
       return {
         ...state,
+        username: action.payload.username,
+        nickName: action.payload.nickName,
+        profilePic: action.payload.profilePic,
+        token: action.payload.token,
+        id: action.payload.id,
         message: action.payload.message,
-        isAuthenticated: false
+        isAuthenticated: action.payload.isAuthenticated
       };
     default:
       return state;
